@@ -16,12 +16,12 @@ MyQueue.prototype.push = function (x) {
  */
 MyQueue.prototype.pop = function () {
     if (this.arr1.length) {
-        return this.arr1.shift()
+        return this.arr1.pop()
     }
-    if (this.arr2.length) {
-        this.arr1.push(this.arr2.shift())
-        return this.arr1.shift()
+    while (this.arr2.length) {
+        this.arr1.push(this.arr2.pop())
     }
+    return this.arr1.pop()
 };
 
 /**
