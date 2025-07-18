@@ -44,18 +44,36 @@
 /**
  * 509. 斐波那契数 - 动态规划步骤拆分
  * @param n
- * @param memo
+ */
+// function fib(n: number): number {
+//     // 1. 定义状态
+//     const dp:number[] = []
+//     // 2. 初始化状态
+//     dp[0] = 0
+//     dp[1] = 1
+//     for (let i = 2; i <= n; i++) {
+//         // 3. 状态转移方程
+//         dp[i] = dp[i - 1] + dp[i - 2]
+//     }
+//     // 4. 计算结果
+//     return dp[n]
+// };
+
+/**
+ * 509. 斐波那契数 - 动态规划状态压缩
+ * @param n
  */
 function fib(n: number): number {
-    // 1. 定义状态
-    const dp:number[] = []
-    // 2. 初始化状态
-    dp[0] = 0
-    dp[1] = 1
+    if (n <= 1) return n
+    // 1. 定义状态 2. 初始化状态
+    let pre = 0
+    let cur = 1
     for (let i = 2; i <= n; i++) {
         // 3. 状态转移方程
-        dp[i] = dp[i - 1] + dp[i - 2]
+        let newVal = pre + cur
+        pre = cur
+        cur = newVal
     }
     // 4. 计算结果
-    return dp[n]
+    return cur
 };
