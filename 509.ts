@@ -28,15 +28,34 @@
  * @param n
  * @param memo
  */
+// function fib(n: number): number {
+//     const memo:number[] = []
+//     for (let i = 0; i <= n; i++) {
+//         // 初始化 0 和 1 对应的位置
+//         if (i <= 1) {
+//             memo[i] = i
+//             continue
+//         }
+//         memo[i] = memo[i - 1] + memo[i - 2]
+//     }
+//     return memo[n]
+// };
+
+/**
+ * 509. 斐波那契数 - 动态规划步骤拆分
+ * @param n
+ * @param memo
+ */
 function fib(n: number): number {
-    const memo:number[] = []
-    for (let i = 0; i <= n; i++) {
-        // 初始化 0 和 1 对应的位置
-        if (i <= 1) {
-            memo[i] = i
-            continue
-        }
-        memo[i] = memo[i - 1] + memo[i - 2]
+    // 1. 定义状态
+    const dp:number[] = []
+    // 2. 初始化状态
+    dp[0] = 0
+    dp[1] = 1
+    for (let i = 2; i <= n; i++) {
+        // 3. 状态转移方程
+        dp[i] = dp[i - 1] + dp[i - 2]
     }
-    return memo[n]
+    // 4. 计算结果
+    return dp[n]
 };
