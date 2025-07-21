@@ -26,6 +26,7 @@ function levelOrder(root: TreeNode | null): number[][] {
         const levelQueue: number[] = []
         const len = queue.length
         // 逐层获取节点数组
+        // 后续会不断添加新的元素到队尾 所以需要使用for固定循环次数 使其只是遍历当前层级
         for (let i = 0; i < len; i++) {
             // 依次访问队头
             const current = queue.shift()!
