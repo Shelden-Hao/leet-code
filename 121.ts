@@ -1,6 +1,11 @@
 /**
- * 买卖股票的最佳时机
+ * 121. 买卖股票的最佳时机
+ * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
  * @param prices
+ * @description
+ * 思路：dp保存直到第i天获取到的最大收益，而不是第i天当天获取到的收益，
+ * 不用最后一次遍历所有元素找最大值的操作。
+ * 所以题干主要难在求状态转移方程，不断更新dp[i]和此前最小值。
  */
 function maxProfit(prices: number[]): number {
     const n = prices.length
