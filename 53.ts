@@ -1,6 +1,10 @@
 /**
- * 最大子数组和
+ * 53. 最大子数组和
+ * https://leetcode.cn/problems/maximum-subarray/description/
  * @param nums 原数组
+ * @description
+ * dp每一项要么是元素自身，要么是前一项的dp加上自身，二者求最大。
+ * dp[i]表示以第nums[i]项结尾的最大子数组和
  */
 // function maxSubArray(nums: number[]): number {
 //     // 数组长度
