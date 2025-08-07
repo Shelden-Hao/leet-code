@@ -20,12 +20,13 @@ class ListNode {
 }
 
 /**
- * 删除链表的倒数第N个节点
+ * 19. 删除链表的倒数第 N 个结点
  * @param head
  * @param n
  */
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     // 虚拟节点 便于操作第一个节点 很多情况下可以简化我们的操作过程
+    // 这里使用虚拟节点的目的是考虑到会删除掉头节点的情况，如果直接 dummy = head 则不能删除头节点
     const dummy = new ListNode(0)
     dummy.next = head
 
@@ -45,3 +46,5 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     slow.next = slow.next?.next!
     return dummy.next;
 };
+
+export {}
