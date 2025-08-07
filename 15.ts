@@ -1,3 +1,10 @@
+/**
+ * 15. 三数之和
+ * https://leetcode.cn/problems/3sum/
+ * @param nums 原数组
+ * @description 一层遍历第一个元素，然后使用双指针遍历剩余元素。
+ * 但是注意去重，i 和 left 对应的元素可以相同
+ */
 function threeSum(nums: number[]): number[][] {
     const length = nums.length
     nums.sort((a, b) => a - b)
