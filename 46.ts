@@ -50,7 +50,8 @@ function permute(nums: number[]): number[][] {
     const path: number[] = []
     function backtrack() {
         if (path.length === n) {
-            result.push(path)
+            // result.push(path) 相当于直接把path 的引入加入到result中，所以我们可以使用解构每次都加入一个新的引用
+            result.push([...path])
             return
         }
         for (let i = 0; i < n; i++) {
