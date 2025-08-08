@@ -65,10 +65,12 @@ class ListNode {
 //     let newHead: ListNode | null = null
 //     while (head) {
 //         /*
-//             1. current 指向下一个节点 为了保留下一个节点的引用不被销毁
-//             2. 改变 head 的指向为 newHead 对于第一个节点来说就是指向了null
-//             3. newHead 移动到 head 节点 为了让下一轮操作 head 指向 current 的前一个节点
-//             4. 让 head 移动到下一个节点
+//             1. current 指向下一个节点 为了保留下一个节点的引用不被销毁 => 移动cur
+//             2. 改变 head 的指向为 newHead 对于第一个节点来说就是指向了null => 反转 head指向(反转唯一操作)
+//             3. newHead 移动到 head 节点 为了让下一轮操作 head 指向 current 的前一个节点 => 移动 newHead
+//             4. 让 head 移动到下一个节点 => 移动head
+//             一次反转前：newHead -> head    -> cur  -> ...
+//             一次反转后：[]      <- newHead -> head -> cur -> ...
 //          */
 //         let current: ListNode | null = head.next
 //         head.next = newHead
