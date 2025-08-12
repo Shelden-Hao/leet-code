@@ -6,8 +6,10 @@
  * 每一次遍历到岛屿再递归，直到所有二维数组元素遍历完成，结束。
  */
 function numIslands(grid: string[][]): number {
+    if (!grid) return 0
     const row = grid.length
     const col = grid[0].length
+    if (row === 0 || col === 0) return 0
     let count = 0
     for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
