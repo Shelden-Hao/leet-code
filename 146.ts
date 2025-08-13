@@ -12,6 +12,11 @@ class DLinkedNode {
     }
 }
 
+/**
+ * 146. LRU 缓存
+ * https://leetcode.cn/problems/lru-cache/description/
+ * @description 方法一：map结构存储链表节点，节点之间连接顺序为缓存使用顺序。
+ */
 class LRUCache {
     private capacity: number
     private map: Map<number, DLinkedNode>
@@ -109,5 +114,38 @@ class LRUCache {
  * var param_1 = obj.get(key)
  * obj.put(key,value)
  */
+
+/**
+ * 146. LRU 缓存
+ * https://leetcode.cn/problems/lru-cache/description/
+ * @description 方法二：map结构自带按照插入顺序排列内部属性，所以无需链表结构的引入。
+ */
+// class LRUCache {
+//     private capacity: number
+//     private cache: Map<number, number>
+//     constructor(capacity: number) {
+//         this.capacity = capacity
+//         this.cache = new Map()
+//     }
+//
+//     get(key: number): number {
+//         // 这里为了题目写-1，但是实际情况是value可能恰好为-1不够准确
+//         if (!this.cache.has(key)) return -1
+//         const value = this.cache.get(key)!
+//         this.cache.delete(key)
+//         this.cache.set(key, value)
+//         return value
+//     }
+//
+//     put(key: number, value: number): void {
+//         if (this.cache.has(key)) {
+//             this.cache.delete(key)
+//         } else if (this.cache.size >= this.capacity) {
+//             // 实现了迭代器的对象可以直接使用next方法逐个访问value
+//             this.cache.delete(this.cache.keys().next().value)
+//         }
+//         this.cache.set(key, value);
+//     }
+// }
 
 export {}
