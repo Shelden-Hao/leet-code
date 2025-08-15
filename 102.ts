@@ -36,11 +36,13 @@ function levelOrder(root: TreeNode | null): number[][] {
     // 遍历队列 依次出队
     while (queue.length) {
         const levelQueue: number[] = []
+        // 获取 len 并赋值给一个常量，因为在队列遍历的同时队列的长度会一直改变
         const len = queue.length
         // 逐层获取节点数组
         // 后续会不断添加新的元素到队尾 所以需要使用for固定循环次数 使其只是遍历当前层级
         for (let i = 0; i < len; i++) {
             // 依次访问队头
+            // 注意：这里一定要弹出队列！不要只记得获取值而忘记了删除值！
             const current = queue.shift()!
             levelQueue.push(current.val)
             // 然后添加左右子节点到队尾
