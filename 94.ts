@@ -24,7 +24,7 @@ class TreeNode {
 }
 
 /**
- * 二叉树中序遍历
+ * 94. 二叉树中序遍历
  * @param root 根节点
  */
 function inorderTraversal(root: TreeNode | null): number[] {
@@ -38,3 +38,5 @@ function inorderTraversal(root: TreeNode | null): number[] {
     traverse(root)
     return res
 };
+
+export {}
