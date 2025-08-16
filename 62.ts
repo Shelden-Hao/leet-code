@@ -1,7 +1,10 @@
 /**
- * 不同路径
+ * 62. 不同路径
+ * https://leetcode.cn/problems/unique-paths/description/
  * @param m 第m行
  * @param n 第n列
+ * @description 动态规划
+ * 注意：初始化阶段，看清下标，保证第一行第一列初始化正确。
  */
 function uniquePaths(m: number, n: number): number {
     // 定义状态
@@ -23,3 +26,5 @@ function uniquePaths(m: number, n: number): number {
     }
     return dp[m - 1][n - 1]
 };
+
+export {}
