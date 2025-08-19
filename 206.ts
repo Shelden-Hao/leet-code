@@ -1,4 +1,4 @@
-/**
+ /**
  * Definition for singly-linked list.
  * class ListNode {
  *     val: number
@@ -92,7 +92,8 @@ function reverseList(head: ListNode | null): ListNode | null {
     if (head === null) return null
     if (head.next === null) return head
 
-    const newHead = reverseList(head.next ?? null)
+    // 双问号表达式 `??` 使用：当前面表达式的值为 null 或者是 undefined，则返回后面的值，否则返回前面的值。
+    const newHead = reverseList(head.next)
     // 递归到这里开始执行节点指向的操作：
     // 最后的迭代为null无以下操作
     // 第一次执行以下操作的时候 下面的 head为 倒数第二个节点 上面的 head 是倒数第三个节点
