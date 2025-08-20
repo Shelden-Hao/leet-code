@@ -69,6 +69,7 @@ function lengthOfLIS(nums: number[]): number {
         while (left <= right) {
             const mid = Math.floor((left+right) / 2)
             if (num <= tails[mid]) {
+                // 当 num === tails[mid] 的时候，也要更新 right=mid-1，是因为需要找到第一个比num小的，所以还要继续向左收缩
                 right = mid - 1
             } else {
                 left = mid + 1
