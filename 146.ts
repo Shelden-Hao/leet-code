@@ -130,6 +130,7 @@ class LRUCache {
 //
 //     get(key: number): number {
 //         // 这里为了题目写-1，但是实际情况是value可能恰好为-1不够准确
+//         // 一定要是 has 而不是 get
 //         if (!this.cache.has(key)) return -1
 //         const value = this.cache.get(key)!
 //         this.cache.delete(key)
@@ -138,9 +139,11 @@ class LRUCache {
 //     }
 //
 //     put(key: number, value: number): void {
+//         // 一定需要先判断是否存在 key
 //         if (this.cache.has(key)) {
 //             this.cache.delete(key)
 //         } else if (this.cache.size >= this.capacity) {
+//             // 如果执行了上面存在 key 的情况，那么一定不会执行这个超出容量的的情况
 //             // 实现了迭代器的对象可以直接使用next方法逐个访问value
 //             this.cache.delete(this.cache.keys().next().value)
 //         }
