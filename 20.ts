@@ -14,6 +14,7 @@
  */
 function isValid(s: string): boolean {
     const stack: string[] = []
+    // map 对象的键一定要是右边符号值，这样推入和弹出时获取到的才是左符号，刚好与 map 对象的 value 匹配
     const map: Record<string, string> = {
         ')': '(',
         '}': '{',
@@ -30,3 +31,5 @@ function isValid(s: string): boolean {
     }
     return stack.length === 0
 };
+
+export {}
