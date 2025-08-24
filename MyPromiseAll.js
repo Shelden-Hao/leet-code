@@ -21,6 +21,7 @@ Promise.myAll = function (promises) {
                 fulfilledCount++
                 // 由于 Promise.all 特性，只要有一个 rejected 整体就是 rejected。
                 // 所以只有所有都 fulfilled 才会 resolve(result) ，否则都 rejected ，结果仍正确
+                // 这里同理不能使用 length，不明确数据类型， length 只有在 Array 才满足
                 if (fulfilledCount === count) {
                     resolve(result)
                 }
@@ -32,8 +33,23 @@ Promise.myAll = function (promises) {
     })
 };
 
-Promise.myAll([1, 2, Promise.reject(3)]).then((values) => {
-    console.log('fulfilled', values)
-}, (errors) => {
-    console.log('rejected', errors)
+const p1 = new Promise(resolve => {
+    setTimeout(() => {
+        resolve(111)
+    }, 3000)
+})
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject(222)
+    }, 2000)
+})
+const p3 = new Promise(resolve => {
+    setTimeout(() => {
+        resolve(333)
+    }, 1000)
+})
+Promise.myAll([p1, p2, p3]).then(res => {
+    console.log('res', res)
+}, err => {
+    console.log('err', err)
 })
