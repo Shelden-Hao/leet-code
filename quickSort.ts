@@ -6,7 +6,7 @@
  */
 function quickSort(arr: number[]): number[] {
 
-    partition(0, arr.length)
+    partition(0, arr.length - 1)
 
     function partition(left: number, right: number) {
         if (left >= right) return
@@ -19,6 +19,7 @@ function quickSort(arr: number[]): number[] {
         let j = right - 1
 
         while (i <= j) {
+            // 相等的情况会自己处理，无需代码体现
             while (arr[i] < pivot) {
                 i++;
             }
@@ -35,8 +36,8 @@ function quickSort(arr: number[]): number[] {
             }
         }
 
-        // 此时 i 位置及其左边都是比基准要小的，j 位置及其右边都是比基准要大的 i和j的关系：j<i
-        // 所以需要给pivot放在中间位置，所以是和第一个比他大的元素做交换
+        // 此时 i 的左边都是比基准要小的，j 的右边都是比基准要大的 i和j的关系：j<i
+        // 所以需要给pivot放在中间位置，所以是和一个比他大的元素做交换
         [arr[i], arr[right]] = [arr[right], arr[i]]
 
         // 然后继续给左右两边进行partition
