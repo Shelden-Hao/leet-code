@@ -1,25 +1,21 @@
 /**
- * 方法一 递归clone
+ * 方法一 递归clone - 最简易版
  * @param obj 原对象
- * @param hash 存储原对象和克隆对象的映射
  * @return {*|*[]|{}} 克隆对象
  */
-function deepClone(obj, hash = new WeakMap()) {
+function deepClone(obj) {
     // 边界情况 null 或者基本类型
     if (obj === null || typeof obj !== 'object') {
         return obj
     }
-    // 处理循环引用
-    if (hash.has(obj)) {
-        return hash.get(obj)
-    }
+
     // 创建对象/数组新容器
     const cloneObj = Array.isArray(obj) ? [] : {}
-    hash.set(obj, cloneObj)
+
     // 递归拷贝到新容器
     for (const objKey in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, objKey)) {
-            cloneObj[objKey] = deepClone(obj[objKey], hash)
+        if (obj.hasOwnProperty(objKey)) {
+            cloneObj[objKey] = deepClone(obj[objKey])
         }
     }
     return cloneObj
