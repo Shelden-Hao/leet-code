@@ -3,7 +3,7 @@ Function.prototype.myCall = function (thisArg, ...args) {
     const fn = this;
     // 2. 对 thisArg 转成对象类型 防止传入非对象类型
     thisArg = (thisArg !== null && thisArg !== undefined) ? Object(thisArg) : window
-    // 3. 调用需要被执行的函数
+    // 3. 调用需要被执行的函数(隐式绑定this)
     thisArg.fn = fn
     const result = thisArg.fn(...args)
     delete thisArg.fn
@@ -20,7 +20,7 @@ Function.prototype.myApply = function (thisArg, argArray) {
     thisArg.fn = fn
     // 3. 判断argArray
     argArray = argArray ? argArray : []
-    // 4. 调用函数
+    // 4. 调用函数(隐式绑定this)
     const result = thisArg.fn(...argArray)
     // 5. 删除属性
     delete thisArg.fn
@@ -37,6 +37,7 @@ Function.prototype.myBind = function (thisArg, ...args) {
     // 3. 代理函数执行原函数
     function proxyFn(...proxyArgs) {
         thisArg.fn = fn
+        // 隐式绑定this
         const result = thisArg.fn(...args, ...proxyArgs)
         delete thisArg.fn
         return result
