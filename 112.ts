@@ -28,4 +28,28 @@ function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
     return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right , targetSum - root.val)
 };
 
+/**
+ * 变式：从1开始，只能加5或者乘3，计算 1024的所有可能
+ * @description dfs 。这个题本质上是一个 从 1 到 1024 的路径搜索问题，允许的操作（路径）只有「+5」和「×3」 。
+ * 根节点是 1。每个节点可以生成两个子节点：n + 5，n * 3，我们希望找到所有能到达 1024 的路径。
+ */
+function findWays(target: number) {
+    const res: number [][] = []
+
+    function dfs(sum: number, path: number[]) {
+        // 剪枝
+        if (sum > target) return
+        if (sum === target) {
+            res.push([...path])
+            return
+        }
+        // 左子树： ＋5
+        dfs(sum + 5, [...path, sum + 5])
+        // 右子树： *3
+        dfs(sum * 3, [...path, sum * 3])
+    }
+    dfs(1, [1])
+    return res
+}
+
 export {}
