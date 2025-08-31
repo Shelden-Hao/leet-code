@@ -44,3 +44,5 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
     cur.next = list1 !== null ? list1 : list2
     return dummy.next;
 };
+
+export {}
