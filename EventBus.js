@@ -25,6 +25,7 @@ class EventBus {
     once(event, callback) {
         const wrapper = (...args) => {
             callback(...args)
+            // 这里的 this 必须得是在箭头函数内，否则读取不到正确的 this
             this.off(event, wrapper)
         }
         this.on(event, wrapper)
