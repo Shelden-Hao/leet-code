@@ -1,5 +1,6 @@
 /**
- * 合并两个有序数组
+ * 88. 合并两个有序数组
+ * https://leetcode.cn/problems/merge-sorted-array/description/
  * @param nums1 第一个数组
  * @param m 第一个数组的长度
  * @param nums2 第二个数组
@@ -16,7 +17,7 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
     let index = m + n - 1
     // 从后往前遍历，谁大就先放谁
     while (index1 >= 0 && index2 >= 0) {
-        if (nums1[index1] > nums2[index2]) {
+        if (nums1[index1] > nums2[index2]) { // 此时的大于等于或者大于不影响结果
             nums1[index] = nums1[index1]
             index1--
         } else {
@@ -35,3 +36,5 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
 };
 
 merge([1,2,3,0,0,0], 3, [2,5,6], 3)
+
+export {}
