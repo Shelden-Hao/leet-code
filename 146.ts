@@ -143,6 +143,7 @@ class LRUCache {
         if (this.cache.has(key)) {
             this.cache.delete(key)
         } else {
+            // 这个 else 写不写都可以，因为如果有key，然后删掉，那么size一定是小于capacity，不会走这个逻辑
             if (this.cache.size >= this.capacity) {
                 // 如果执行了上面存在 key 的情况，那么一定不会执行这个超出容量的的情况
                 // 实现了迭代器的对象可以直接使用next方法逐个访问value
