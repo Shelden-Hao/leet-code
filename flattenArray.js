@@ -41,6 +41,7 @@ function flattenArray(arr) {
  * @return {*|*[]}
  */
 // function flattenArray(arr, depth = 1) {
+//     // slice 对原数组的做一层浅拷贝，防止直接返回引用导致原始arr被修改。
 //     if (depth === 0) return arr.slice()
 //     const res = []
 //     for (let item of arr) {
