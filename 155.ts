@@ -14,6 +14,9 @@ class MinStack {
         if (this._minStack.length === 0 || val <= this._minStack[this._minStack.length - 1]) {
             this._minStack.push(val)
         }
+        // 如果弹出的不是最小值，minStack 不动，依然正确地维护着最小值。
+        // 如果弹出的正好是最小值，minStack 也会一起更新，保证正确性。
+        // 不会存在「minStack 里有过时的元素」的问题。因为 minStack 里的每个元素，都是 当前还在 stack 中的某个最小值。
     }
 
     pop(): void {
