@@ -25,6 +25,7 @@ function findKthLargest(nums: number[], k: number): number {
         const pivot = right
         let i = left
         let j = right - 1
+        // 这里和下面必须要可以取等，否则最后的 i，j 所处的位置不正确
         while (i <= j) {
             // 注意：这里一定要明确大于或者小于，等于的情况在之后更小的数组中已经处理了
             while (nums[i] > nums[pivot]) {
