@@ -32,6 +32,7 @@ class ListNode {
 function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
     if (headA === null || headB === null) return null
 
+    // 使用临时指针存储，否则会导致链表的无限循环，后续保证只连接一次
     let pA: ListNode | null = headA
     let pB: ListNode | null = headB
 
