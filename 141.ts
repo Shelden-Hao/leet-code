@@ -50,6 +50,7 @@ function hasCycle(head: ListNode | null): boolean {
     let fast = head
     let slow = head
 
+    // 确保 fast有值是为了可以继续遍历，确保fast.next 有值是为了 fast.next.next 不报错
     while (fast && fast.next) {
         fast = fast.next.next;
         slow = slow!.next
