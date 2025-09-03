@@ -29,6 +29,7 @@
 // 方法一：思路：dp[i]表示在i这天卖出所能获得的最大收益
 // 所以题干主要难在：求状态转移方程，不断更新dp[i]和此前最小值。
 // dp[i] = prices[i] - minPrice
+// 不能获取任何利润，返回 0 。如果后面都无法收益的话，返回最大dp一样符合题干，因为第一天dp就是0 。
 function maxProfit(prices: number[]): number {
     const n = prices.length
     const dp: number[] = []
