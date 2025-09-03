@@ -52,7 +52,7 @@
  * @param nums 原数组
  * @description 时间复杂度为 O(nlogn) 。遍历元素为 O(n) 二分查找为 O(logn) 。
  * 用一个数组 tails 维护当前所有长度的递增子序列的最小结尾值（越小越好，方便后面接上）。
- * 遍历原数组，对每个元素 x，用二分查找在 tails 中找到第一个 ≥ x 的位置并替换（如果没找到就直接追加到末尾）。
+ * 遍历原数组，对每个元素 x，用二分查找在 tails 中找到第一个 < x 的位置并替换（如果没找到就直接追加到末尾）。
  * tails 的长度就是 LIS 的长度，因为它始终保存了最优的“接龙基础”。
  */
 function lengthOfLIS(nums: number[]): number {
