@@ -9,6 +9,7 @@
  */
 function coinChange(coins: number[], amount: number): number {
     // Infinity 无限大 这样才能使用 dp 最少硬币替换掉
+    // dp 长度需要是amount+1，因为dp[0]不需要硬币也是一种情况
     const dp: number[] = new Array(amount + 1).fill(Infinity)
     dp[0] = 0
 
