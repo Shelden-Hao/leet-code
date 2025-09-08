@@ -1,3 +1,10 @@
+/**
+ * 懒汉式 LazyMan
+ * @description
+ * 注意：
+ * 1. 在每次执行的任务里面调用next(任务按顺序执行)，而不是添加任务后执行next(立即执行task，多个任务会同时触发)
+ * 2. 使用setTimeout确保构造函数执行完再启动任务队列
+ */
 class LazyMan {
     constructor(name) {
         this.name = name
@@ -66,3 +73,4 @@ class LazyMan {
 // （2秒后） Wake up after 2s
 // Hi I am Hank
 // Eat dinner~
+
