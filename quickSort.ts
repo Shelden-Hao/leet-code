@@ -8,7 +8,9 @@ function quickSort(arr: number[]): number[] {
 
     partition(0, arr.length - 1)
 
+    // 递归将数组分成两组，以当前最后一个元素为基准
     function partition(left: number, right: number) {
+        // left right 用来固定边界，i j 移动来改变当前指向(用来操作元素)
         if (left >= right) return
 
         // 找到基准元素
