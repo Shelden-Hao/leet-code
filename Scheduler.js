@@ -12,90 +12,77 @@
 // - 如果 k = 2，10 个任务，每个 1s → 总时间 ≈ 5s。
 
 /**
- * 一、利用 Promise 实现一个并发任务调度器
+ * 一、并发请求
+ * @description 接收一个url数组和一个最大并发请求数，返回一个敲定的Promise。
+ * 和Promise.all最大的区别就是Promise.all不会控制并发(同理不用补位)。
  */
-class Scheduler {
-    constructor(max) {
-        this.max = max // 最大并发数
-        this.count = 0 // 当前正在执行的任务数
-        this.queue = [] // 等待队列
-    }
-
-    add(task) {
-        return new Promise((resolve) => {
-            // 启动任务调度器的函数
-            const run = () => {
-                this.count++
-                task().then((res) => {
-                    resolve(res)
-                }).finally(() => {
-                    this.count--
-                    if (this.queue.length > 0) {
-                        const next = this.queue.shift()
-                        next() // 执行下一个任务
-                    }
-                })
-            }
-            if (this.count < this.max) {
-                // 当前执行数小于最大并发数
-                run()
-            } else {
-                this.queue.push(run)
-            }
-        })
-    }
-}
-
-// 模拟请求：延迟 time 毫秒后返回 value
-function mockRequest(time, value) {
+function concurRequest(urls, maxNum) {
     return new Promise(resolve => {
-        setTimeout(() => {
-            console.log(`完成请求: ${value}`);
-            resolve(value);
-        }, time);
-    });
+        // 如果urls为空，直接resolve
+        if (urls.length === 0) {
+            resolve([])
+            return
+        }
+        // 结果数组
+        const result = []
+        // 请求任务索引
+        let reqIndex = 0
+        // 完成的请求数
+        let overCount = 0
+
+        async function request() {
+            // 响应的索引需要与开始请求的索引相同
+            let respIndex = reqIndex
+            const url = urls[reqIndex]
+            reqIndex++
+            // 发送当前请求
+            result[respIndex] = await fetch(url)
+            overCount++
+            // 每完成一个请求，立刻调用下一个请求进行补位
+            if (reqIndex < urls.length) {
+                request()
+            }
+            if (overCount === urls.length) {
+                resolve(result)
+            }
+        }
+        // 在最大并发数和urls中选择较小值进行多个并发
+        for (let i = 0; i < Math.min(urls.length, maxNum); i++) {
+            request()
+        }
+    })
 }
 
-const scheduler = new Scheduler(2);
-
-scheduler.add(() => mockRequest(1000, "1"));
-scheduler.add(() => mockRequest(500, "2"));
-scheduler.add(() => mockRequest(300, "3"));
-scheduler.add(() => mockRequest(400, "4"));
-
-// 输出顺序: 2 -> 3 -> 1 -> 4
-// 先添加任务1和任务2，0.5s 后输出 2，将3加入任务队列，0.3s后输出3，再过0.2s输出1，再过0.2s后输出4
-
-/**
- * 二、串行请求
- * @param tasks
- * @return {Promise<*[]>}
- */
-async function serialRequests(tasks) {
-    const results = [];
-    for (let task of tasks) {
-        const res = await task();  // 等待上一个完成
-        results.push(res);
-    }
-    return results;
-}
-
-// 测试
-const tasks = [
-    () => mockRequest(1000, "A"),
-    () => mockRequest(500, "B"),
-    () => mockRequest(300, "C")
-];
-serialRequests(tasks).then(res => console.log("串行结果:", res));
-
-/**
- * 三、并行请求
- * @param tasks
- * @return {Promise<Awaited<unknown>[]>}
- */
-async function parallelRequests(tasks) {
-    return Promise.all(tasks.map(task => task())); // 一起跑
-}
-
-// 测试
-parallelRequests(tasks).then(res => console.log("并行结果:", res));
+// /**
+//  * 二、串行请求
+//  * @param tasks
+//  * @return {Promise<*[]>}
+//  */
+// async function serialRequests(tasks) {
+//     const results = [];
+//     for (let task of tasks) {
+//         const res = await task();  // 等待上一个完成
+//         results.push(res);
+//     }
+//     return results;
+// }
+//
+// // 测试
+// const tasks = [
+//     () => mockRequest(1000, "A"),
+//     () => mockRequest(500, "B"),
+//     () => mockRequest(300, "C")
+// ];
+// serialRequests(tasks).then(res => console.log("串行结果:", res));
+//
+// /**
+//  * 三、并行请求
+//  * @param tasks
+//  * @return {Promise<Awaited<unknown>[]>}
+//  */
+// async function parallelRequests(tasks) {
+//     return Promise.all(tasks.map(task => task())); // 一起跑
+// }
+//
+// // 测试
+// parallelRequests(tasks).then(res => console.log("并行结果:", res));
