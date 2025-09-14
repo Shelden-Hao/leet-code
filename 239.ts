@@ -1,17 +1,19 @@
 /**
- * 滑动窗口最大值
+ * 239. 滑动窗口最大值
+ * https://leetcode.cn/problems/sliding-window-maximum/description/
  * @param nums 原始数组
  * @param k 滑动窗口的宽度
+ * @description 双端队列
  */
 function maxSlidingWindow(nums: number[], k: number): number[] {
     // 创建一个双端队列 每个元素都是索引
     // 双端队列，队列的两端都可以进行新增和删除
     const deque:number[] = []
-    const length = nums.length
+    const n = nums.length
     const res: number[] = []
 
     // 依次遍历所有元素
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < n; i++) {
         // 判断队尾：队列不为空 并且新加入的元素要比原来尾部的元素要大
         while (deque.length && nums[i] > nums[deque[deque.length - 1]]) {
             deque.pop()
