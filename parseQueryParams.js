@@ -110,3 +110,27 @@ function parseQueryParams(url) {
 //
 // console.log(parseQueryParams("https://example.com?arr=1&arr=2&arr=3"));
 // // { arr: ["1", "2", "3"] }
+
+/**
+ * 解析 URL
+ */
+function parseURL(url) {
+    const u = new URL(url)
+    const query = {}
+    for (let [key, value] of u.searchParams.entries()) {
+        query[key] = value
+    }
+    return {
+        protocol: u.protocol,   // 协议，例如 "https:"
+        hostname: u.hostname,   // 主机名，例如 "example.com"
+        port: u.port,           // 端口，例如 "8080"
+        host: u.host,           // 主机 + 端口，例如 "example.com:8080"
+        pathname: u.pathname,   // 路径，例如 "/path/to/file"
+        search: u.search,       // 查询字符串，例如 "?a=1&b=2"
+        query,                  // 解析后的查询参数对象
+        hash: u.hash            // 哈希，例如 "#section1"
+    }
+}
+
+// 使用示例
+// console.log(parseURL("https://example.com:8080/path/to/file?a=1&b=2#section1"));
