@@ -56,3 +56,4 @@ class TTLCache {
 // setTimeout(() => {
 //     console.log(cache.get("foo")); // null (已过期)
 // }, 3000);
+
