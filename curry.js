@@ -1,5 +1,5 @@
 /**
- * 函数柯里化 carry
+ * 函数柯里化 curry
  * @param fn
  * @return {(function(...[*]): (*))|*}
  */
