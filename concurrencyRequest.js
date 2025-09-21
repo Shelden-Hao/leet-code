@@ -16,7 +16,7 @@
  * @description 接收一个url数组和一个最大并发请求数，返回一个敲定的Promise。
  * 和Promise.all最大的区别就是Promise.all不会控制并发(同理不用补位)。
  */
-function concurRequest(urls, maxNum) {
+function concurrencyRequest(urls, maxNum) {
     return new Promise(resolve => {
         // 如果urls为空，直接resolve
         if (urls.length === 0) {
