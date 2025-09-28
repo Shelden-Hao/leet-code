@@ -43,33 +43,40 @@
 //     return right - left + 1 - 2;
 // }
 
+/**
+ * 5. 最长回文子串
+ * https://leetcode.cn/problems/longest-palindromic-substring/description/
+ * @param s 原始字符串
+ */
 function longestPalindrome(s: string): string {
     if (s.length === 0 || s.length === 1) return s;
     let res = ''
     let max = ''
+
+    /**
+     * 从左右指针扩展找到最长回文子串的函数
+     * @param s 原字符串
+     * @param l 左指针起始索引
+     * @param r 右指针起始索引
+     * @return 最长回文子串
+     */
+    function centerExpand(s: string, l: number, r: number): string {
+        let left = l
+        let right = r
+        while (left >= 0 && right < s.length && s[left] === s[right]) {
+            left--
+            right++
+        }
+        return s.slice(left + 1, right)
+    }
+
     for (let i = 0; i < s.length; i++) {
+        // 奇数长度字符串
         const oddStr = centerExpand(s, i, i)
+        // 偶数长度字符串
         const evenStr = centerExpand(s, i, i + 1)
         max = oddStr.length > evenStr.length ? oddStr : evenStr
         res = max.length > res.length ? max : res
     }
     return res
-};
-
-/**
- * 从左右指针扩展找到最长回文子串的函数
- * @param s 原字符串
- * @param l 左指针起始索引
- * @param r 右指针起始索引
- * @return 最长回文子串
- */
-function centerExpand(s: string, l: number, r: number): string {
-    let left = l
-    let right = r
-    while (left >= 0 && right < s.length && s[left] === s[right]) {
-        left--
-        right++
-    }
-    const tempStr = s.slice(left + 1, right)
-    return tempStr
 }
