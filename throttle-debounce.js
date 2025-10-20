@@ -34,4 +34,38 @@ function debounce(fn, delay = 300) {
     };
 }
 
+/**
+ * 防抖——增强版
+ * run()：触发防抖逻辑（延迟执行 fn）
+ * cancel()：取消当前防抖任务
+ * 当 dependencies 改变时，防抖状态重置（相当于 useEffect 的依赖行为）
+ * @param {Function} fn 回调函数
+ * @param {number} delay 防抖时间
+ * @param {any[]} dependencies 依赖项数组
+ * @returns 防抖函数执行函数和取消函数
+ */
+function debounceEnhanced(fn, delay = 300, dependencies = []) {
+    let timer = null
+    let prevDeps = dependencies
+    function run(...args) {
+        const currentDeps = JSON.stringify(args)
+        if (currentDeps !== prevDeps) {
+            clearTimeout(timer)
+            prevDeps = currentDeps
+        }
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            fn.apply(this, args)
+        }, delay)
+    }
+    function cancel() {
+        clearTimeout(timer)
+        timer = null
+    }
+    return {
+        run,
+        cancel
+    }
+}
+
 export {}
