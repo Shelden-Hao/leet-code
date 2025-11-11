@@ -147,7 +147,7 @@ class LRUCache {
             if (this.cache.size >= this.capacity) {
                 // 如果执行了上面存在 key 的情况，那么一定不会执行这个超出容量的的情况
                 // 实现了迭代器的对象可以直接使用next方法逐个访问value
-                this.cache.delete(this.cache.keys().next().value)
+                this.cache.delete(this.cache.keys().next().value!)
             }
         }
         this.cache.set(key, value);
