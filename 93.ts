@@ -12,7 +12,7 @@ function restoreIpAddresses(s: string): string[] {
     // 一次路径的结果
     const path: string[] =[]
     function backtrack(startIndex: number) {
-        // 已经切割成了4段
+        // 结束条件：已经切割成了4段
         if (path.length === 4) {
             // 并且刚好最终起始切割位置为 s.length
             if (startIndex === s.length) {
@@ -22,18 +22,21 @@ function restoreIpAddresses(s: string): string[] {
         }
 
         // len 表示本地要截取的 ip 的长度，只能是 1~3
+        // 🔄 尝试取 1位、2位、3位 作为下一段
         for (let len = 1; len <=3 ; len++) {
             if (startIndex + len > s.length) break
-            // 截取 ip 片段（左开右闭，所以上述终止遍历条件没有等号）
+            // 截取 ip 片段（左闭右开，所以上述终止遍历条件没有等号）
             const segment = s.substring(startIndex, startIndex + len)
 
             // 前导零非法 需排除
-            if (segment.length > 1 && segment[0] === '0') continue
+            if (segment.length > 1 && segment[0] === '0') break
             // 大小必须在 0~255 之间
-            if (Number(segment) > 255) continue
+            if (Number(segment) > 255) break
 
             path.push(segment)
+            // 🔄 递归：处理下一段
             backtrack(startIndex + len)
+            // 🔄 回溯：撤销选择，恢复 path 状态
             path.pop()
         }
     }
