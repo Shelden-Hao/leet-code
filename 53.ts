@@ -21,6 +21,8 @@
 
 /**
  * 最大子数组和 - 状态压缩优化
+ * @description 状态压缩，其实是出于全局的状态考虑。
+ * 将状态分为临时状态（preVal）和全局状态（max），不断调整更新临时状态，进而更新全局状态，最终得到结果。
  * @param nums 原数组
  */
 function maxSubArray(nums: number[]): number {
