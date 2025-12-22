@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find First Element</title>
+  </head>
+  <body>
+    <div>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </div>
+    <div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+    </div>
+    <script>
+      // 使用广度优先搜索，找到文档中第一个div元素
+      const findFirstElement = () => {
+        const queue = [];
+        if (document.body) {
+          queue.push(document.body);
+        }
+        while (queue.length > 0) {
+          const node = queue.shift();
+          if (node.tagName === "DIV") {
+            return node;
+          }
+          const children = node.children;
+          for (const child of children) {
+            queue.push(child);
+          }
+        }
+        return null;
+      };
+      console.log(findFirstElement());
+    </script>
+  </body>
+</html>
