@@ -40,7 +40,7 @@ function deepClone(obj) {
 // 方法一（补充）：解决循环引用问题
 function deepClone2(value) {
   // 同时空间换时间，同时弱引用，可以进行垃圾回收，避免内存泄露
-  const cache = new WeakMap();
+  const cache = new Map(); // 没有必要 WeakMap，因为该函数执行完成之后就被销毁了
 
   function _deepClone2(val) {
     if (val === null || typeof val !== "object") {
@@ -51,6 +51,7 @@ function deepClone2(value) {
     }
 
     const cloneValue = Array.isArray(val) ? [] : {};
+    // 一定要写在循环之前，否则无法避免无限递归的问题
     cache.set(val, cloneValue);
 
     for (const key in val) {
