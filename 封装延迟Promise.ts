@@ -4,12 +4,12 @@
  * @param value Promise传入值(可选)
  */
 function delayPromise(delay: number, value?: string) {
-    return new Promise<string | undefined>((resolve) => {
-        setTimeout(() => {
-            resolve(value)
-            console.log(value)
-        }, delay)
-    })
+  return new Promise<string | undefined>((resolve) => {
+    setTimeout(() => {
+      resolve(value);
+      console.log(value);
+    }, delay);
+  });
 }
 
 /**
@@ -29,10 +29,11 @@ function delayPromise(delay: number, value?: string) {
 
 /**
  * 基于延迟Promise使用then方法构建任务队列
+ * 按顺序依次执行每个延迟任务
  */
 Promise.resolve()
-    .then(() => delayPromise(1000, '用时1000ms 完成任务1'))
-    .then(() => delayPromise(500, '用时500ms 完成任务2'))
-    .catch(error => console.error('执行过程中发生错误：', error))
+  .then(() => delayPromise(3000, "用时1000ms 完成任务1"))
+  .then(() => delayPromise(500, "用时500ms 完成任务2"))
+  .catch((error) => console.error("执行过程中发生错误：", error));
 
-console.log('任务队列开始执行（执行顺序取决于延迟）')
+console.log("任务队列开始执行（执行顺序取决于延迟）");
