@@ -1,5 +1,5 @@
 /**
- * 封装延迟Promise(将一个setTimeout封装到Promise中)
+ * 封装延迟Promise(将一个setTimeout封装到Promise中) / 用 Promise 实现 sleep 函数
  * @param delay 延迟的时间(ms)
  * @param value Promise传入值(可选)
  */
