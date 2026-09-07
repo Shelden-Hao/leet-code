@@ -1,3 +1,9 @@
+/**
+ * 实现计算器 比如：1*2+3/4
+ * @param expression 表达式
+ * @returns {*} 结果
+ * @description 数字放数字栈，运算符放运算符栈；遇到低优先级运算符时，先把栈里更高或同等优先级的运算计算掉
+ */
 function calculate(expression) {
     // 去掉空格
     expression = expression.replace(/\s+/g, '')
@@ -10,6 +16,7 @@ function calculate(expression) {
         '*': 2,
         '/': 2
     }
+
     // 计算栈顶两个数
     function applyOp() {
         const b = nums.pop()
@@ -17,10 +24,18 @@ function calculate(expression) {
         const op = ops.pop()
         let res = 0
         switch (op) {
-            case '+': res = a + b; break
-            case '-': res = a - b; break
-            case '*': res = a * b; break
-            case '/': res = a / b; break
+            case '+':
+                res = a + b;
+                break
+            case '-':
+                res = a - b;
+                break
+            case '*':
+                res = a * b;
+                break
+            case '/':
+                res = a / b;
+                break
         }
         nums.push(res)
     }
@@ -59,7 +74,7 @@ function calculate(expression) {
     return nums.pop()
 }
 
-// ✅ 测试
-// console.log(calculate("1 + 2 * (3 + 4)"));  // 15
+// 测试
+console.log(calculate("1 + 2 * (3 + 4)"));  // 15
 // console.log(calculate("(2+3)*4-5/5"));      // 19
 // console.log(calculate("3 + 4 * 2 / (1 - 5)")); // 1
