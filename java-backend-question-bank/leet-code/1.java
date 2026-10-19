@@ -1,5 +1,6 @@
 /**
  * [1. 两数之和](https://leetcode.cn/problems/two-sum/)
+ * 使用哈希表存储数和对应下标，遍历的同时进行寻找
  */
 class Solution {
     public int[] twoSum(int[] nums, int target) {
